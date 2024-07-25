@@ -2,5 +2,6 @@
 
 class Degree
 {
-
+public:
+	enum DegreeProgram {Security, Network, Software};
 };
