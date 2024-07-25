@@ -11,7 +11,9 @@ private:
 	std::string _lastName;
 	std::string _emailAddress;
 	int _age;
-	std::vector<int> _daysToCompleteCourses;
+	int _daysInCourseOne;
+	int _daysInCourseTwo;
+	int _daysInCourseThree;
 	Degree::DegreeProgram _degreeProgram;
 
 public:
@@ -21,7 +23,7 @@ public:
 	std::string GetStudentLastName();
 	std::string GetStudentEmailAddress();
 	int GetStudentAge();
-	std::vector<int> GetDaysToCompleteCourses();
+	int* GetDaysToCompleteCourses();
 	Degree::DegreeProgram GetStudentDegreeProgram();
 
 	// Mutators
@@ -30,17 +32,12 @@ public:
 	void SetStudentLastName(std::string lastName);
 	void SetStudentEmailAddress(std::string emailAddress);
 	void SetStudentAge(int age);
-	void SetDaysToCompleteCourses(std::vector<int> daysToCompleteCourses);
+	void SetDaysToCompleteCourses(int daysInCourseOne, int daysInCourseTwo, int daysInCourseThree);
 	void SetStudentDegreeProgram(Degree::DegreeProgram degreeProgram);
 
 	// Printer
 	void PrintStudentDetails();
 
 	// Constructor
-	Student(std::string studentID,
-			std::string firstName,
-			std::string emailAddress,
-			int age,
-			std::vector<int> daysToCompleteCourses,
-			Degree::DegreeProgram degreeProgram);
+	Student(std::string studentID, std::string firstName, std::string lastName, std::string emailAddress, int age, int daysInCourseOne, int daysInCourseTwo, int daysInCourseThree, Degree::DegreeProgram degreeProgram);
 };

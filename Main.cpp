@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Student.h"
 
 int main()
 {
@@ -10,5 +11,6 @@ int main()
       "A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY",
       "A5,[firstname],[lastname],[emailaddress],[age], [numberofdaystocomplete3courses],SOFTWARE" };
 
-    std::cout << "Hello World!\n";
+    Student student{ "A5", "Chris", "Britton", "test@email.com", 27, 3, 6, 9, Degree::Software};
+    student.PrintStudentDetails();
 }

@@ -1,7 +1,10 @@
 #include "Student.h"
+#include <iostream>
 
-Student::Student(std::string studentID, std::string firstName, std::string emailAddress, int age, std::vector<int> daysToCompleteCourses, Degree::DegreeProgram degreeProgram)
-	: _studentID{studentID}, _firstName{firstName}, _emailAddress{emailAddress}, _age{age}, _daysToCompleteCourses{daysToCompleteCourses}, _degreeProgram{degreeProgram}
+Student::Student(std::string studentID, std::string firstName, std::string lastName, std::string emailAddress, int age, int daysInCourseOne, int daysInCourseTwo, int daysInCourseThree, Degree::DegreeProgram degreeProgram)
+	: _studentID{ studentID }, _firstName{ firstName }, _lastName{ lastName }, _emailAddress{ emailAddress }, _age{ age }, _daysInCourseOne{ daysInCourseOne }, _daysInCourseTwo{ daysInCourseTwo }, _daysInCourseThree{daysInCourseThree}, _degreeProgram{
+	degreeProgram
+}
 {
 
 }
@@ -31,9 +34,9 @@ int Student::GetStudentAge()
 	return _age;
 }
 
-std::vector<int> Student::GetDaysToCompleteCourses()
+ int* Student::GetDaysToCompleteCourses()
 {
-	return _daysToCompleteCourses;
+	 return new int[3] { _daysInCourseOne, _daysInCourseTwo, _daysInCourseThree };
 }
 
 Degree::DegreeProgram Student::GetStudentDegreeProgram()
@@ -66,9 +69,11 @@ void Student::SetStudentAge(int age)
 	_age = age;
 }
 
-void Student::SetDaysToCompleteCourses(std::vector<int> daysToCompleteCourses)
+void Student::SetDaysToCompleteCourses(int daysInCourseOne, int daysInCourseTwo, int daysInCourseThree)
 {
-	_daysToCompleteCourses = daysToCompleteCourses;
+	_daysInCourseOne = daysInCourseOne;
+	_daysInCourseTwo = daysInCourseTwo;
+	_daysInCourseThree = daysInCourseThree;
 }
 
 void Student::SetStudentDegreeProgram(Degree::DegreeProgram degreeProgram)
@@ -78,5 +83,13 @@ void Student::SetStudentDegreeProgram(Degree::DegreeProgram degreeProgram)
 
 void Student::PrintStudentDetails()
 {
-	// For printing specific student data 
+	std::cout << "Student ID: " << _studentID << std::endl;
+	std::cout << "First Name: " << _firstName << std::endl;
+	std::cout << "Last Name: " << _lastName << std::endl;
+	std::cout << "Email Address: " << _emailAddress << std::endl;
+	std::cout << "Age: " << _age << std::endl;
+	std::cout << "Days in Course One: " << _daysInCourseOne << std::endl;
+	std::cout << "Days in Course Two: " << _daysInCourseTwo << std::endl;
+	std::cout << "Days in Course Three: " << _daysInCourseThree << std::endl;
+	std::cout << "Degree Program: " << _degreeProgram << std::endl;
 }
