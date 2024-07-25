@@ -24,6 +24,9 @@
     <ClCompile Include="Roster.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Degree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Degree.h">

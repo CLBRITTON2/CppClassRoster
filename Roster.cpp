@@ -1,6 +1,7 @@
-#include "Roster.h"
 #include <iostream>
+#include "Roster.h"
 #include "Student.h"
+#include "Degree.h"
 
 Student* ClassRosterArray[5];
 
@@ -71,7 +72,7 @@ void Roster::PrintAll()
 		std::cout << daysInCourseOne[i] << separator << whiteSpace;
 	}
 	std::cout << "}    ";
-	std::cout << "Degree Program: " << degreeProgram << "    ";
+	std::cout << "Degree Program: " << Degree::DegreeProgramToString(degreeProgram) << "    ";
 }
 
 void Roster::PrintAverageDaysInCourse(std::string studentID)
