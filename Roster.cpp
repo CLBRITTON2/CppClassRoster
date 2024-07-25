@@ -8,7 +8,7 @@ Student* ClassRosterArray[5];
 Roster::Roster()
 {
 	// initialize class roster pointers to null so we don't get garbage values
-	for (int i{0}; i <= 4; i++)
+	for (int i{ 0 }; i <= 4; i++)
 	{
 		ClassRosterArray[i] = nullptr;
 	}
@@ -18,13 +18,9 @@ Roster::Roster()
 
 void Roster::Add(std::string studentID, std::string firstName, std::string lastName, std::string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree::DegreeProgram degreeProgram)
 {
-	int counter{ 0 };
 	std::cout << "Student: " << firstName << " added to class roster" << std::endl;
-	if (ClassRosterArray[counter] == NULL)
-	{
-		ClassRosterArray[counter] = new Student(studentID, firstName, lastName, emailAddress, age, daysInCourse1, daysInCourse2, daysInCourse3, degreeProgram);
-	}
-	counter++;
+	ClassRosterArray[_studentCounter] = new Student(studentID, firstName, lastName, emailAddress, age, daysInCourse1, daysInCourse2, daysInCourse3, degreeProgram);
+	_studentCounter++;
 }
 
 void Roster::Remove(std::string studentID)
@@ -33,46 +29,36 @@ void Roster::Remove(std::string studentID)
 
 void Roster::PrintAll()
 {
-	std::cout << "Print all called" << std::endl;
-
-	std::string studentID;
-	std::string firstName;
-	std::string lastName;
-	std::string emailAddress;
-	int age;
-	int* daysInCourseOne;
-	Degree::DegreeProgram degreeProgram;
-
-		//Grab all of the values from the student
-		for (int i{ 0 }; i <= 4; i++)
-		{
-			studentID = (*ClassRosterArray)->GetStudentId();
-			firstName = (*ClassRosterArray)->GetStudentFirstName();
-			lastName = (*ClassRosterArray)->GetStudentLastName();
-			emailAddress = (*ClassRosterArray)->GetStudentEmailAddress();
-			age = (*ClassRosterArray)->GetStudentAge();
-			daysInCourseOne = (*ClassRosterArray)->GetDaysToCompleteCourses();
-			degreeProgram = (*ClassRosterArray)->GetStudentDegreeProgram();
-		}
-
-	std::cout << studentID << "    ";
-	std::cout << "First Name: " << firstName << "    ";
-	std::cout << "Last Name: " << lastName << "    ";
-	std::cout << "Age: " << age << "    ";
-	std::cout << "daysInCourse: {";
-	std::string separator{ "," };
-	std::string whiteSpace{ " " };
-	for (int i{ 0 }; i <= 2; i++)
+	// Grab a local copy of each student variable to format and print to the console
+	for (int i{ 0 }; i <= 4; i++)
 	{
-		if (daysInCourseOne[i] == daysInCourseOne[2])
+		std::string studentID = ClassRosterArray[i]->GetStudentId();
+		std::string firstName = ClassRosterArray[i]->GetStudentFirstName();
+		std::string lastName = ClassRosterArray[i]->GetStudentLastName();
+		std::string emailAddress = ClassRosterArray[i]->GetStudentEmailAddress();
+		int age = ClassRosterArray[i]->GetStudentAge();
+		int* daysInCourseOne = ClassRosterArray[i]->GetDaysToCompleteCourses();
+		Degree::DegreeProgram degreeProgram = ClassRosterArray[i]->GetStudentDegreeProgram();
+
+		std::cout << studentID << "    ";
+		std::cout << "First Name: " << firstName << "    ";
+		std::cout << "Last Name: " << lastName << "    ";
+		std::cout << "Age: " << age << "    ";
+		std::cout << "daysInCourse: {";
+		std::string separator{ "," };
+		std::string whiteSpace{ " " };
+		for (int j{ 0 }; j <= 2; j++)
 		{
-			separator = "";
-			whiteSpace = "";
+			if (daysInCourseOne[j] == daysInCourseOne[2])
+			{
+				separator = "";
+				whiteSpace = "";
+			}
+			std::cout << daysInCourseOne[j] << separator << whiteSpace;
 		}
-		std::cout << daysInCourseOne[i] << separator << whiteSpace;
+		std::cout << "}    ";
+		std::cout << "Degree Program: " << Degree::DegreeProgramToString(degreeProgram) << "    " << std::endl;
 	}
-	std::cout << "}    ";
-	std::cout << "Degree Program: " << Degree::DegreeProgramToString(degreeProgram) << "    ";
 }
 
 void Roster::PrintAverageDaysInCourse(std::string studentID)
