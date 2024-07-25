@@ -16,10 +16,10 @@ Roster::Roster()
 	std::cout << "Roster constructor called, class roster array pointers initialized to null" << std::endl;;
 }
 
-void Roster::Add(std::string studentID, std::string firstName, std::string lastName, std::string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree::DegreeProgram degreeProgram)
+void Roster::Add(std::string studentID, std::string firstName, std::string lastName, std::string emailAddress, int age, int daysInCourseOne, int daysInCourseTwo, int daysInCourseThree, Degree::DegreeProgram degreeProgram)
 {
 	std::cout << "Student: " << firstName << " added to class roster" << std::endl;
-	ClassRosterArray[_studentCounter] = new Student(studentID, firstName, lastName, emailAddress, age, daysInCourse1, daysInCourse2, daysInCourse3, degreeProgram);
+	ClassRosterArray[_studentCounter] = new Student(studentID, firstName, lastName, emailAddress, age, daysInCourseOne, daysInCourseTwo, daysInCourseThree, degreeProgram);
 	_studentCounter++;
 }
 
