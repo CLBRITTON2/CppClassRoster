@@ -11,6 +11,7 @@ private:
 	const std::string _studentData[5];
 public:
 	Roster();
+	~Roster();
 	void Add(std::string studentID, std::string firstName, std::string lastName, std::string emailAddress, int age, int daysInCourseOne, int daysInCourseTwo, int daysInCourseThree, Degree::DegreeProgram degreeProgram);
 	void Remove(std::string studentID);
 	void PrintAll();

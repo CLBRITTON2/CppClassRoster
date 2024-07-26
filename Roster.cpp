@@ -21,6 +21,12 @@ Roster::Roster()
 	ParseStudentData(_studentData, 5);
 }
 
+Roster::~Roster()
+{
+	std::cout << "Roster destructor called - deleting _classRosterArray" << std::endl;
+	delete _classRosterArray;
+}
+
 void Roster::Add(std::string studentID, std::string firstName, std::string lastName, std::string emailAddress, int age, int daysInCourseOne, int daysInCourseTwo, int daysInCourseThree, Degree::DegreeProgram degreeProgram)
 {
 	if (_classRosterArray[_studentCounter] != nullptr)
@@ -48,13 +54,14 @@ void Roster::Remove(std::string studentID)
 		{
 			delete _classRosterArray[i];
 			_classRosterArray[i] = nullptr;
+			_studentCounter--;
 		}
 	}
 }
 
 void Roster::PrintAll()
 {
-	for (int i{ 0 }; i <= 4; i++)
+	for (int i{ 0 }; i < _studentCounter; i++)
 	{
 		if (_classRosterArray[i] != nullptr)
 		{
@@ -87,7 +94,7 @@ void Roster::PrintAll()
 
 void Roster::PrintAverageDaysInCourse(std::string studentID)
 {
-	for (int i{ 0 }; i <= 4; i++)
+	for (int i{ 0 }; i < _studentCounter; i++)
 	{
 		if (_classRosterArray[i] != nullptr)
 		{
@@ -104,7 +111,7 @@ void Roster::PrintAverageDaysInCourse(std::string studentID)
 
 void Roster::PrintInvalidEmails()
 {
-	for (int i{ 0 }; i <= 4; i++)
+	for (int i{ 0 }; i < _studentCounter; i++)
 	{
 		if (_classRosterArray[i] != nullptr)
 		{
@@ -121,7 +128,7 @@ void Roster::PrintInvalidEmails()
 
 void Roster::PrintByDegreeProgram(Degree::DegreeProgram degreeProgram)
 {
-	for (int i{ 0 }; i <= 4; i++)
+	for (int i{ 0 }; i < _studentCounter; i++)
 	{
 		if (_classRosterArray[i] != nullptr)
 		{
