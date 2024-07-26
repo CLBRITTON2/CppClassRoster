@@ -39,8 +39,14 @@ void Roster::Remove(std::string studentID)
 {
 	for (int i{ 0 }; i <= 4; i++)
 	{
+		if (_classRosterArray[i] == nullptr)
+		{
+			std::cout << "Error: Student with student ID: " << studentID << " was not found." << std::endl;
+			return;
+		}
+
 		// If the IDs match, remove the student and set the pointer to null so nothing attempts to access that value again
-		if (_classRosterArray[i] != nullptr && _classRosterArray[i]->GetStudentId() == studentID)
+		if (_classRosterArray[i]->GetStudentId() == studentID)
 		{
 			delete _classRosterArray[i];
 			_classRosterArray[i] = nullptr;
