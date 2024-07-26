@@ -37,6 +37,15 @@ void Roster::Add(std::string studentID, std::string firstName, std::string lastN
 
 void Roster::Remove(std::string studentID)
 {
+	for (int i{ 0 }; i <= 4; i++)
+	{
+		// If the IDs match, remove the student and set the pointer to null so nothing attempts to access that value again
+		if (_classRosterArray[i] != nullptr && _classRosterArray[i]->GetStudentId() == studentID)
+		{
+			delete _classRosterArray[i];
+			_classRosterArray[i] = nullptr;
+		}
+	}
 }
 
 void Roster::PrintAll()

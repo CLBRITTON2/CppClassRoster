@@ -6,4 +6,6 @@ int main()
 {
     Roster classRoster;
     classRoster.PrintAll();
+    classRoster.Remove("A1");
+    classRoster.PrintAll();
 }
