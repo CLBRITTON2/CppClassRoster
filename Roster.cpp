@@ -18,23 +18,20 @@ Roster::Roster()
 	  "A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORK",
 	  "A3,Jack,Napoli,The_lawyer99yahoo.com,19,20,40,33,SOFTWARE",
 	  "A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY",
-	  "A5,[firstname],[lastname],[emailaddress],[age], [numberofdaystocomplete3courses],SOFTWARE" };
+	  "A5,Chris,Britton,Test@email.com,27,3, 6, 9,SOFTWARE" };
 
 	ParseStudentData(studentData, 5);
 }
 
 void Roster::Add(std::string studentID, std::string firstName, std::string lastName, std::string emailAddress, int age, int daysInCourseOne, int daysInCourseTwo, int daysInCourseThree, Degree::DegreeProgram degreeProgram)
 {
-	if (_classRosterArray[_studentCounter] != nullptr) // assuming _classRosterArray has 5 elements
+	if (_classRosterArray[_studentCounter] != nullptr)
 	{
 		std::cout << "Error: Roster is full. Cannot add more students." << std::endl;
 		return;
 	}
 
 	_classRosterArray[_studentCounter] = new Student(studentID, firstName, lastName, emailAddress, age, daysInCourseOne, daysInCourseTwo, daysInCourseThree, degreeProgram);
-
-	std::cout << "Added student: " << firstName << " to _classRosterArray" << std::endl;
-
 	_studentCounter++;
 }
 
@@ -44,37 +41,33 @@ void Roster::Remove(std::string studentID)
 
 void Roster::PrintAll()
 {
-	// Grab a local copy of each student variable to format and print to the console
 	for (int i{ 0 }; i <= 4; i++)
 	{
 		if (_classRosterArray[i] != nullptr)
 		{
-			std::string studentID = _classRosterArray[i]->GetStudentId();
-			std::string firstName = _classRosterArray[i]->GetStudentFirstName();
-			std::string lastName = _classRosterArray[i]->GetStudentLastName();
-			std::string emailAddress = _classRosterArray[i]->GetStudentEmailAddress();
-			int age = _classRosterArray[i]->GetStudentAge();
-			int* daysInCourseOne = _classRosterArray[i]->GetDaysToCompleteCourses();
-			Degree::DegreeProgram degreeProgram = _classRosterArray[i]->GetStudentDegreeProgram();
+			// Use a ref to the student object to avoid unnecessarily copying variables
+			Student& student = *_classRosterArray[i];
+		
+			std::cout << student.GetStudentId() << "    ";
+			std::cout << "First Name: " << student.GetStudentFirstName() << "    ";
+			std::cout << "Last Name: " << student.GetStudentLastName() << "    ";
+			std::cout << "Age: " << student.GetStudentAge() << "    ";
 
-			std::cout << studentID << "    ";
-			std::cout << "First Name: " << firstName << "    ";
-			std::cout << "Last Name: " << lastName << "    ";
-			std::cout << "Age: " << age << "    ";
+			// Creating the days in course text format ex: daysInCourse: {35, 40, 55}
 			std::cout << "daysInCourse: {";
 			std::string separator{ "," };
 			std::string whiteSpace{ " " };
 			for (int j{ 0 }; j <= 2; j++)
 			{
-				if (daysInCourseOne[j] == daysInCourseOne[2])
+				if (student.GetDaysToCompleteCourses()[j] == student.GetDaysToCompleteCourses()[2])
 				{
 					separator = "";
 					whiteSpace = "";
 				}
-				std::cout << daysInCourseOne[j] << separator << whiteSpace;
+				std::cout << student.GetDaysToCompleteCourses()[j] << separator << whiteSpace;
 			}
 			std::cout << "}    ";
-			std::cout << "Degree Program: " << Degree::DegreeProgramToString(degreeProgram) << "    " << std::endl;
+			std::cout << "Degree Program: " << Degree::DegreeProgramToString(student.GetStudentDegreeProgram()) << "    " << std::endl;
 		}
 	}
 }
@@ -103,24 +96,24 @@ void Roster::ParseStudentData(const std::string studentData[], size_t size)
 
 		if (data != nullptr)
 		{
-			std::stringstream ss(*data);
+			std::stringstream stringStream(*data);
 			std::string studentID, firstName, lastName, emailAddress, degreeProgramStr;
 			int age, daysInCourseOne, daysInCourseTwo, daysInCourseThree;
 
-			// Parse the string
-			std::getline(ss, studentID, ',');
-			std::getline(ss, firstName, ',');
-			std::getline(ss, lastName, ',');
-			std::getline(ss, emailAddress, ',');
-			ss >> age;
-			ss.ignore(); // Ignore the comma
-			ss >> daysInCourseOne;
-			ss.ignore(); // Ignore the comma
-			ss >> daysInCourseTwo;
-			ss.ignore(); // Ignore the comma
-			ss >> daysInCourseThree;
-			ss.ignore(); // Ignore the comma
-			std::getline(ss, degreeProgramStr, ','); // Read the rest of the string
+			// Parse the string - ignore commas
+			std::getline(stringStream, studentID, ',');
+			std::getline(stringStream, firstName, ',');
+			std::getline(stringStream, lastName, ',');
+			std::getline(stringStream, emailAddress, ',');
+			stringStream >> age;
+			stringStream.ignore();
+			stringStream >> daysInCourseOne;
+			stringStream.ignore();
+			stringStream >> daysInCourseTwo;
+			stringStream.ignore();
+			stringStream >> daysInCourseThree;
+			stringStream.ignore(); 
+			std::getline(stringStream, degreeProgramStr, ',');
 
 			// Convert the string to an actual enum
 			Degree::DegreeProgram degreeProgram = Degree::StringToDegreeProgram(degreeProgramStr);
