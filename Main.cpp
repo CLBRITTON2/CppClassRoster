@@ -5,6 +5,8 @@
 int main()
 {
     Roster classRoster;
+    classRoster.PrintInvalidEmails();
+    std::cout << std::endl;
     classRoster.PrintAll();
     std::cout << std::endl;
 

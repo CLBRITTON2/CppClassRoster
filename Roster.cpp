@@ -104,6 +104,19 @@ void Roster::PrintAverageDaysInCourse(std::string studentID)
 
 void Roster::PrintInvalidEmails()
 {
+	for (int i{ 0 }; i <= 4; i++)
+	{
+		if (_classRosterArray[i] != nullptr)
+		{
+			std::string emailAddress = _classRosterArray[i]->GetStudentEmailAddress();
+			bool emailIsValid = RunEmailValidation(emailAddress);
+
+			if (!emailIsValid)
+			{
+				std::cout << "Invalid Email Address: " << emailAddress << std::endl;
+			}
+		}
+	}
 }
 
 void Roster::PrintByDegreeProgram(Degree::DegreeProgram degreeProgram)
@@ -157,5 +170,31 @@ void Roster::ParseStudentData(const std::string studentData[], size_t size)
 
 			Add(studentID, firstName, lastName, emailAddress, age, daysInCourseOne, daysInCourseTwo, daysInCourseThree, degreeProgram);
 		}
+	}
+}
+
+bool Roster::RunEmailValidation(const std::string& studentEmailAddress)
+{
+	size_t atSymbol = studentEmailAddress.find('@');
+
+	// Check to ensure @ exists, and that it isn't the first or last character
+	if (atSymbol == studentEmailAddress[0] || atSymbol == studentEmailAddress.size() - 1 || atSymbol == std::string::npos)
+	{
+		return false;
+	}
+
+	size_t dotSymbol = studentEmailAddress.find('.');
+
+	// Chehck to ensure the . exists, and that it isn't the first or last character in the email
+	if (dotSymbol == studentEmailAddress[0] || dotSymbol == studentEmailAddress.size() - 1 || atSymbol == std::string::npos)
+	{
+		return false;
+	}
+
+	size_t space = studentEmailAddress.find(" ");
+	// Check to ensure there is no space in the email
+	if (space != std::string::npos)
+	{
+		return false;
 	}
 }

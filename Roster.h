@@ -18,4 +18,5 @@ public:
 	void PrintInvalidEmails();
 	void PrintByDegreeProgram(Degree::DegreeProgram degreeProgram);
 	void ParseStudentData(const std::string studentData[], size_t size);
+	bool RunEmailValidation(const std::string& studentEmailAddress);
 };
