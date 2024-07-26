@@ -24,7 +24,16 @@ Roster::Roster()
 Roster::~Roster()
 {
 	std::cout << "Roster destructor called - deleting _classRosterArray" << std::endl;
-	delete _classRosterArray;
+	
+	// Delete each student from the roster individually
+	for (int i{ 0 }; i < _studentCounter; i++)
+	{
+		if (_classRosterArray[i] != nullptr)
+		{
+			delete _classRosterArray[i];
+			_classRosterArray[i] = nullptr;
+		}
+	}
 }
 
 void Roster::Add(std::string studentID, std::string firstName, std::string lastName, std::string emailAddress, int age, int daysInCourseOne, int daysInCourseTwo, int daysInCourseThree, Degree::DegreeProgram degreeProgram)
