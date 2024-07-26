@@ -91,5 +91,5 @@ void Student::PrintStudentDetails()
 	std::cout << "Days in Course One: " << _daysInCourseOne << std::endl;
 	std::cout << "Days in Course Two: " << _daysInCourseTwo << std::endl;
 	std::cout << "Days in Course Three: " << _daysInCourseThree << std::endl;
-	std::cout << "Degree Program: " << _degreeProgram << std::endl;
+	std::cout << "Degree Program: " << Degree::DegreeProgramToString(_degreeProgram) << std::endl;
 }
