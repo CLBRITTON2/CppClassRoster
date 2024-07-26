@@ -1,11 +1,12 @@
 #pragma once
 #include <string>
 #include "Degree.h"
+#include "Student.h"
 
 class Roster
 {
 private:
-	int _studentCounter{ 0 };
+	int _studentCounter;
 	Student* _classRosterArray[5];
 public:
 	Roster();
@@ -15,4 +16,5 @@ public:
 	void PrintAverageDaysInCourse(std::string studentID);
 	void PrintInvalidEmails();
 	void PrintByDegreeProgram(Degree::DegreeProgram degreeProgram);
+	void ParseStudentData(const std::string studentData[], size_t size);
 };
