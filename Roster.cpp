@@ -5,7 +5,12 @@
 #include "Degree.h"
 
 Roster::Roster()
-	:_studentCounter{0}
+	:_studentCounter{0}, 
+	 _studentData{ "A1,John,Smith,John1989@gm ail.com,20,30,35,40,SECURITY",
+	  "A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORK",
+	  "A3,Jack,Napoli,The_lawyer99yahoo.com,19,20,40,33,SOFTWARE",
+	  "A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY",
+	  "A5,Chris,Britton,Test@email.com,27,3,6,9,SOFTWARE" }
 {
 	// initialize class roster pointers to null so we don't get garbage values
 	for (int i{ 0 }; i <= 4; i++)
@@ -13,14 +18,7 @@ Roster::Roster()
 		_classRosterArray[i] = nullptr;
 	}
 
-	const std::string studentData[] = 
-	{ "A1,John,Smith,John1989@gm ail.com,20,30,35,40,SECURITY",
-	  "A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORK",
-	  "A3,Jack,Napoli,The_lawyer99yahoo.com,19,20,40,33,SOFTWARE",
-	  "A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY",
-	  "A5,Chris,Britton,Test@email.com,27,3,6,9,SOFTWARE" };
-
-	ParseStudentData(studentData, 5);
+	ParseStudentData(_studentData, 5);
 }
 
 void Roster::Add(std::string studentID, std::string firstName, std::string lastName, std::string emailAddress, int age, int daysInCourseOne, int daysInCourseTwo, int daysInCourseThree, Degree::DegreeProgram degreeProgram)
