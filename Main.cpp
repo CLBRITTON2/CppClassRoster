@@ -5,22 +5,32 @@
 int main()
 {
     Roster classRoster;
+
+    classRoster.PrintAll();
+    std::cout << std::endl;
+
     classRoster.PrintInvalidEmails();
     std::cout << std::endl;
-    classRoster.PrintAll();
-    std::cout << std::endl;
 
-    classRoster.Remove("A1");
-    classRoster.PrintAll();
-    std::cout << std::endl;
+    for (int i{ 0 }; i <= 4; i++)
+    {
+        std::string studentID;
 
-    classRoster.Remove("A1");
-    std::cout << std::endl;
-    classRoster.PrintAll();
-    std::cout << std::endl;
-
-    classRoster.PrintAverageDaysInCourse("A5");
+        if (classRoster.GetIndividualStudent(i) != nullptr)
+        {
+            studentID = classRoster.GetIndividualStudent(i)->GetStudentId();
+        }
+        classRoster.PrintAverageDaysInCourse(studentID);
+    }
     std::cout << std::endl;
 
     classRoster.PrintByDegreeProgram(Degree::Software);
+    std::cout << std::endl;
+
+    classRoster.Remove("A3");
+    classRoster.PrintAll();
+    std::cout << std::endl;
+
+    classRoster.Remove("A3");
+    std::cout << std::endl;
 }

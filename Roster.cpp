@@ -198,3 +198,11 @@ bool Roster::RunEmailValidation(const std::string& studentEmailAddress)
 		return false;
 	}
 }
+
+Student* Roster::GetIndividualStudent(int index)
+{
+	if (_classRosterArray[index] != nullptr)
+	{
+		return _classRosterArray[index];
+	}
+}
