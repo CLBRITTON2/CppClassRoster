@@ -4,6 +4,9 @@
 
 int main()
 {
+    // Note: studentDataTable is defined in Roster.h and initialized in the Roster constructor
+    // Students are added to the classRoster via the ParseStudentData method in Roster.cpp that's called within the Roster constructor
+
     Roster classRoster;
 
     classRoster.PrintAll();

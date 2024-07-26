@@ -10,7 +10,7 @@ Roster::Roster()
 	  "A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORK",
 	  "A3,Jack,Napoli,The_lawyer99yahoo.com,19,20,40,33,SOFTWARE",
 	  "A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY",
-	  "A5,Chris,Britton,Test@email.com,27,3,6,9,SOFTWARE" }
+	  "A5,Chris,Britton,test@test.com,27,11,9,11,SOFTWARE" }
 {
 	// initialize class roster pointers to null so we don't get garbage values
 	for (int i{ 0 }; i <= 4; i++)
@@ -44,7 +44,19 @@ void Roster::Add(std::string studentID, std::string firstName, std::string lastN
 		return;
 	}
 
-	_classRosterArray[_studentCounter] = new Student(studentID, firstName, lastName, emailAddress, age, daysInCourseOne, daysInCourseTwo, daysInCourseThree, degreeProgram);
+	// Create a new student object with default values
+	Student* newStudent = new Student("", "", "", "", 0, 0, 0, 0, Degree::Security);
+
+	// Use mutators to actually set values
+	newStudent->SetStudentId(studentID);
+	newStudent->SetStudentFirstName(firstName);
+	newStudent->SetStudentLastName(lastName);
+	newStudent->SetStudentEmailAddress(emailAddress);
+	newStudent->SetStudentAge(age);
+	newStudent->SetDaysToCompleteCourses(daysInCourseOne, daysInCourseTwo, daysInCourseThree);
+	newStudent->SetStudentDegreeProgram(degreeProgram);
+
+	_classRosterArray[_studentCounter] = newStudent;
 	_studentCounter++;
 }
 
