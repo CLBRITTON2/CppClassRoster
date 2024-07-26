@@ -17,4 +17,7 @@ int main()
     classRoster.PrintAll();
 
     classRoster.PrintAverageDaysInCourse("A5");
+    std::cout << std::endl;
+
+    classRoster.PrintByDegreeProgram(Degree::Software);
 }

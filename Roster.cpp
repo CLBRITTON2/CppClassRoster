@@ -108,6 +108,17 @@ void Roster::PrintInvalidEmails()
 
 void Roster::PrintByDegreeProgram(Degree::DegreeProgram degreeProgram)
 {
+	for (int i{ 0 }; i <= 4; i++)
+	{
+		if (_classRosterArray[i] != nullptr)
+		{
+			if (_classRosterArray[i]->GetStudentDegreeProgram() == degreeProgram)
+			{
+				_classRosterArray[i]->PrintStudentDetails();
+				std::cout << std::endl;
+			}
+		}
+	}
 }
 
 void Roster::ParseStudentData(const std::string studentData[], size_t size)
