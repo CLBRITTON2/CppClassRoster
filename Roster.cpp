@@ -89,10 +89,10 @@ void Roster::PrintAll()
 			// Use a ref to the student object to avoid unnecessarily copying variables
 			Student& student = *_classRosterArray[i];
 		
-			std::cout << student.GetStudentId() << "    ";
-			std::cout << "First Name: " << student.GetStudentFirstName() << "    ";
-			std::cout << "Last Name: " << student.GetStudentLastName() << "    ";
-			std::cout << "Age: " << student.GetStudentAge() << "    ";
+			std::cout << student.GetStudentId() << "\t";
+			std::cout << "First Name: " << student.GetStudentFirstName() << "\t";
+			std::cout << "Last Name: " << student.GetStudentLastName() << "\t";
+			std::cout << "Age: " << student.GetStudentAge() << "\t";
 
 			// Creating the days in course text format ex: daysInCourse: {35, 40, 55}
 			std::cout << "daysInCourse: {";
@@ -100,15 +100,15 @@ void Roster::PrintAll()
 			std::string whiteSpace{ " " };
 			for (int j{ 0 }; j <= 2; j++)
 			{
-				if (student.GetDaysToCompleteCourses()[j] == student.GetDaysToCompleteCourses()[2])
+				if (j == 2)
 				{
 					separator = "";
 					whiteSpace = "";
 				}
 				std::cout << student.GetDaysToCompleteCourses()[j] << separator << whiteSpace;
 			}
-			std::cout << "}    ";
-			std::cout << "Degree Program: " << Degree::DegreeProgramToString(student.GetStudentDegreeProgram()) << "    " << std::endl;
+			std::cout << "}\t";
+			std::cout << "Degree Program: " << Degree::DegreeProgramToString(student.GetStudentDegreeProgram()) << "\t" << std::endl;
 		}
 	}
 }
