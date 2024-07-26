@@ -15,4 +15,6 @@ int main()
     classRoster.Remove("A1");
     std::cout << std::endl;
     classRoster.PrintAll();
+
+    classRoster.PrintAverageDaysInCourse("A5");
 }

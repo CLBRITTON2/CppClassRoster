@@ -18,7 +18,7 @@ Roster::Roster()
 	  "A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORK",
 	  "A3,Jack,Napoli,The_lawyer99yahoo.com,19,20,40,33,SOFTWARE",
 	  "A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY",
-	  "A5,Chris,Britton,Test@email.com,27,3, 6, 9,SOFTWARE" };
+	  "A5,Chris,Britton,Test@email.com,27,3,6,9,SOFTWARE" };
 
 	ParseStudentData(studentData, 5);
 }
@@ -89,6 +89,19 @@ void Roster::PrintAll()
 
 void Roster::PrintAverageDaysInCourse(std::string studentID)
 {
+	for (int i{ 0 }; i <= 4; i++)
+	{
+		if (_classRosterArray[i] != nullptr)
+		{
+			if (_classRosterArray[i]->GetStudentId() == studentID)
+			{
+				int* daysToCompleteCourses = _classRosterArray[i]->GetDaysToCompleteCourses();
+				int averageDaysInCourse = (daysToCompleteCourses[0] + daysToCompleteCourses[1] + daysToCompleteCourses[2]) / 3;
+
+				std::cout << "Student ID " << studentID << " average number of days in 3 courses is: " << averageDaysInCourse << std::endl;
+			}
+		}
+	}
 }
 
 void Roster::PrintInvalidEmails()
