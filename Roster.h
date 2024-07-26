@@ -6,6 +6,7 @@ class Roster
 {
 private:
 	int _studentCounter{ 0 };
+	Student* _classRosterArray[5];
 public:
 	Roster();
 	void Add(std::string studentID, std::string firstName, std::string lastName, std::string emailAddress, int age, int daysInCourseOne, int daysInCourseTwo, int daysInCourseThree, Degree::DegreeProgram degreeProgram);
