@@ -1,12 +1,21 @@
 #include "Student.h"
 #include <iostream>
 
-Student::Student(std::string studentID, std::string firstName, std::string lastName, std::string emailAddress, int age, int daysInCourseOne, int daysInCourseTwo, int daysInCourseThree, Degree::DegreeProgram degreeProgram)
-	: _studentID{ studentID }, _firstName{ firstName }, _lastName{ lastName }, _emailAddress{ emailAddress }, _age{ age }, _daysInCourseOne{ daysInCourseOne }, _daysInCourseTwo{ daysInCourseTwo }, _daysInCourseThree{daysInCourseThree}, _degreeProgram{
+Student::Student(std::string studentID, std::string firstName, std::string lastName, std::string emailAddress, int age, int* daysToCompleteCourses, Degree::DegreeProgram degreeProgram)
+	: _studentID{ studentID }, _firstName{ firstName }, _lastName{ lastName }, _emailAddress{ emailAddress }, _age{ age }, _degreeProgram{
 	degreeProgram
 }
 {
+	_daysToCompleteCourses = new int[3];
+	_daysToCompleteCourses[0] = daysToCompleteCourses[0];
+	_daysToCompleteCourses[1] = daysToCompleteCourses[1];
+	_daysToCompleteCourses[2] = daysToCompleteCourses[2];
+}
 
+Student::~Student()
+{
+	// Delete the entire array of days
+	delete[] _daysToCompleteCourses;
 }
 
 std::string Student::GetStudentId()
@@ -36,7 +45,7 @@ int Student::GetStudentAge()
 
  int* Student::GetDaysToCompleteCourses()
 {
-	 return new int[3] { _daysInCourseOne, _daysInCourseTwo, _daysInCourseThree };
+	 return _daysToCompleteCourses;
 }
 
 Degree::DegreeProgram Student::GetStudentDegreeProgram()
@@ -71,9 +80,9 @@ void Student::SetStudentAge(int age)
 
 void Student::SetDaysToCompleteCourses(int daysInCourseOne, int daysInCourseTwo, int daysInCourseThree)
 {
-	_daysInCourseOne = daysInCourseOne;
-	_daysInCourseTwo = daysInCourseTwo;
-	_daysInCourseThree = daysInCourseThree;
+	_daysToCompleteCourses[0] = daysInCourseOne;
+	_daysToCompleteCourses[1] = daysInCourseTwo;
+	_daysToCompleteCourses[2] = daysInCourseThree;
 }
 
 void Student::SetStudentDegreeProgram(Degree::DegreeProgram degreeProgram)
@@ -83,13 +92,24 @@ void Student::SetStudentDegreeProgram(Degree::DegreeProgram degreeProgram)
 
 void Student::PrintStudentDetails()
 {
-	std::cout << "Student ID: " << _studentID << std::endl;
-	std::cout << "First Name: " << _firstName << std::endl;
-	std::cout << "Last Name: " << _lastName << std::endl;
-	std::cout << "Email Address: " << _emailAddress << std::endl;
-	std::cout << "Age: " << _age << std::endl;
-	std::cout << "Days in Course One: " << _daysInCourseOne << std::endl;
-	std::cout << "Days in Course Two: " << _daysInCourseTwo << std::endl;
-	std::cout << "Days in Course Three: " << _daysInCourseThree << std::endl;
-	std::cout << "Degree Program: " << Degree::DegreeProgramToString(_degreeProgram) << std::endl;
+	std::cout << _studentID << "\t";
+	std::cout << "First Name: " << _firstName << "\t";
+	std::cout << "Last Name: " << _lastName << "\t";
+	std::cout << "Age: " << _age << "\t";
+
+	// Creating the days in course text format ex: daysInCourse: {35, 40, 55}
+	std::cout << "daysInCourse: {";
+	std::string separator{ "," };
+	std::string whiteSpace{ " " };
+	for (int j{ 0 }; j < 3; j++)
+	{
+		if (j == 2)
+		{
+			separator = "";
+			whiteSpace = "";
+		}
+		std::cout << _daysToCompleteCourses[j] << separator << whiteSpace;
+	}
+	std::cout << "}\t";
+	std::cout << "Degree Program: " << Degree::DegreeProgramToString(_degreeProgram) << "\t" << std::endl;
 }

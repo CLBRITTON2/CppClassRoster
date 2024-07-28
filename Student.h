@@ -11,9 +11,10 @@ private:
 	std::string _lastName;
 	std::string _emailAddress;
 	int _age;
-	int _daysInCourseOne;
-	int _daysInCourseTwo;
-	int _daysInCourseThree;
+	//int _daysInCourseOne;
+	//int _daysInCourseTwo;
+	//int _daysInCourseThree;
+	int* _daysToCompleteCourses;
 	Degree::DegreeProgram _degreeProgram;
 
 public:
@@ -39,5 +40,6 @@ public:
 	void PrintStudentDetails();
 
 	// Constructor
-	Student(std::string studentID, std::string firstName, std::string lastName, std::string emailAddress, int age, int daysInCourseOne, int daysInCourseTwo, int daysInCourseThree, Degree::DegreeProgram degreeProgram);
+	Student(std::string studentID, std::string firstName, std::string lastName, std::string emailAddress, int age, int* daysToCompleteCourses, Degree::DegreeProgram degreeProgram);
+	~Student();
 };

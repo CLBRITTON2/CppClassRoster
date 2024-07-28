@@ -45,7 +45,8 @@ void Roster::Add(std::string studentID, std::string firstName, std::string lastN
 	}
 
 	// Create a new student object with default values
-	Student* newStudent = new Student("", "", "", "", 0, 0, 0, 0, Degree::Security);
+	int def[3] = { 0,0,0 };
+	Student* newStudent = new Student("", "", "", "", 0, def, Degree::Security);
 
 	// Use mutators to actually set values
 	newStudent->SetStudentId(studentID);
@@ -62,7 +63,7 @@ void Roster::Add(std::string studentID, std::string firstName, std::string lastN
 
 void Roster::Remove(std::string studentID)
 {
-	for (int i{ 0 }; i <= 4; i++)
+	for (int i{ 0 }; i < 5; i++)
 	{
 		if (_classRosterArray[i] == nullptr)
 		{
@@ -71,7 +72,7 @@ void Roster::Remove(std::string studentID)
 		}
 
 		// If the IDs match, remove the student and set the pointer to null so nothing attempts to access that value again
-		if (_classRosterArray[i]->GetStudentId() == studentID)
+		if (_classRosterArray[i] != nullptr && _classRosterArray[i]->GetStudentId() == studentID)
 		{
 			delete _classRosterArray[i];
 			_classRosterArray[i] = nullptr;
@@ -82,33 +83,14 @@ void Roster::Remove(std::string studentID)
 
 void Roster::PrintAll()
 {
-	for (int i{ 0 }; i < _studentCounter; i++)
+	for (int i{ 0 }; i < 5; i++)
 	{
 		if (_classRosterArray[i] != nullptr)
 		{
 			// Use a ref to the student object to avoid unnecessarily copying variables
 			Student& student = *_classRosterArray[i];
-		
-			std::cout << student.GetStudentId() << "\t";
-			std::cout << "First Name: " << student.GetStudentFirstName() << "\t";
-			std::cout << "Last Name: " << student.GetStudentLastName() << "\t";
-			std::cout << "Age: " << student.GetStudentAge() << "\t";
-
-			// Creating the days in course text format ex: daysInCourse: {35, 40, 55}
-			std::cout << "daysInCourse: {";
-			std::string separator{ "," };
-			std::string whiteSpace{ " " };
-			for (int j{ 0 }; j <= 2; j++)
-			{
-				if (j == 2)
-				{
-					separator = "";
-					whiteSpace = "";
-				}
-				std::cout << student.GetDaysToCompleteCourses()[j] << separator << whiteSpace;
-			}
-			std::cout << "}\t";
-			std::cout << "Degree Program: " << Degree::DegreeProgramToString(student.GetStudentDegreeProgram()) << "\t" << std::endl;
+			
+			student.PrintStudentDetails();
 		}
 	}
 }
@@ -214,7 +196,7 @@ bool Roster::RunEmailValidation(const std::string& studentEmailAddress)
 	size_t dotSymbol = studentEmailAddress.find('.');
 
 	// Chehck to ensure the . exists, and that it isn't the first or last character in the email
-	if (dotSymbol == studentEmailAddress[0] || dotSymbol == studentEmailAddress.size() - 1 || atSymbol == std::string::npos)
+	if (dotSymbol == studentEmailAddress[0] || dotSymbol == studentEmailAddress.size() - 1 || dotSymbol == std::string::npos)
 	{
 		return false;
 	}
